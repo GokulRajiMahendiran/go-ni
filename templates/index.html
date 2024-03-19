@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nifty Option Chain</title>
+    <style>
+        /* Add CSS styles for the comparison value */
+        .comparison {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .ce-high {
+            background-color: red;
+        }
+
+        .pe-high {
+            background-color: green;
+        }
+
+        /* Add CSS styles for the mild color highlight */
+        .mild-highlight {
+            background-color: #f0f8ff; /* You can adjust the color as needed */
+        }
+
+        /* Add CSS styles for the value display */
+        .value-display {
+            font-size: 16px;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        // Function to refresh the page every 5 seconds
+        setInterval(function() {
+            window.location.reload();
+        }, 5000);
+    </script>
+</head>
+<body>
+    <!-- Display the current underlying value of Nifty -->
+    <div>
+        <h3>Current Underlying Value of Nifty:</h3>
+        <p>{{ nifty_underlying }}</p>
+    </div>
+
+    <!-- Display the option chain data table -->
+    {{ table | safe }}
+
+    <!-- Display the comparison value between CE and PE options -->
+    <div>
+        <h3>Comparison:</h3>
+        <!-- Add dynamic CSS class based on CE or PE higher -->
+        <p class="comparison {% if ce_higher %}ce-high{% else %}pe-high{% endif %}">{{ comparison }}</p>
+    </div>
+
+    <!-- Display the values of ce_change_in_oi_sum and pe_change_in_oi_sum -->
+    <div class="value-display">
+        <p>CE Change in Open Interest Sum: {{ ce_change_in_oi_sum }}</p>
+        <p>PE Change in Open Interest Sum: {{ pe_change_in_oi_sum }}</p>
+    </div>
+
+    <!-- Display the maximum CE_OI and PE_OI values along with their corresponding strike prices -->
+    <div class="value-display">
+        <h3>Market Range for the Day:</h3>
+        <p>Max CE_OI: {{ max_ce_details.CE_OI }} at Strike: {{ max_ce_details.Strike }}</p>
+        <p>Max PE_OI: {{ max_pe_details.PE_OI }} at Strike: {{ max_pe_details.Strike }}</p>
+    </div>
+</body>
+</html>
