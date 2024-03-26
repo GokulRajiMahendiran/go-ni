@@ -61,5 +61,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'gokul-nift'
+          app-name: 'go-ni'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_56740BF2A6004FBF87A9DC9383331B21 }}
